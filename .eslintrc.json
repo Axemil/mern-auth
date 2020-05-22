@@ -27,6 +27,8 @@
     "prettier/prettier": "warn",
     "no-console": "off",
     "eqeqeq": "warn",
-    "no-eval": "error"
+    "no-eval": "error",
+    "consistent-return": "off",
+    "no-underscore-dangle": "off"
   }
 }
