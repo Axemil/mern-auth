@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import './styles/unregMain.scss';
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  font: 14px/1.4 'Roboto', sans-serif;
+  color: rgb(17, 17, 17);
+  background: rgb(255, 255, 255);
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
+img{
+  height: auto;
+  width: 100%;
+}

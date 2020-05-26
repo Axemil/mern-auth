@@ -1,0 +1,69 @@
+$blue: rgb(47, 61, 255);
+.unreg-page{
+    &_main{
+        background-image: url('../assets/back.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: $blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        font-weight: 900;
+    }
+    &_card{
+        width: 300px;
+        border-radius: 10px;
+        background: rgb(255, 255, 255);
+        padding: 10px;
+        box-shadow: 5px 5px 1px rgba($blue, $alpha: 1.0);
+    }
+    &_card h2,&_card h4{
+        text-align: center;
+    }
+    &_card p{
+        padding: 10px 0 10px;
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    &_list{
+        display: flex;
+        justify-content: space-evenly;
+        font-size: 1.1rem;
+        &_item{
+            transition: .3s;
+            &:hover{
+                color: $blue;
+            }
+        }
+    }
+}
+
+@media (min-width: 640px){
+    .unreg-page{
+        &_main{
+            font-size: 1.3rem;
+        }
+        &_card{
+            width: 400px;
+        }
+    }
+     
+}
+     
+@media (min-width: 768px){
+
+     
+}
+     
+@media (min-width: 1024px){
+
+     
+}
+     
+@media (min-width: 1200px){
+
+     
+}
