@@ -1,4 +1,4 @@
-import Registered from './Registered'
-import Unregistered from './Unregistered'
+import Registered from "./Registered";
+import Unregistered from "./Unregistered";
 
-export default { Registered, Unregistered } 
+export default { Registered, Unregistered };

@@ -6,6 +6,8 @@ const Registered = () => {
     return (
         <Switch>
             <Route path="/" exact  component={pages.UnregMain} />
+            <Route path="/login" component={pages.Login} />
+            <Route path="/registrate" component={pages.Registrate}  />
         </Switch>
     )
 }
