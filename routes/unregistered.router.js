@@ -12,6 +12,7 @@ router.post("/register", registerValidation(), async (req, res) => {
 
     if (!errors.isEmpty()) {
       return res.status(400).json({
+        result: "Error!",
         errors: errors.array(),
         message: "Incorrect data",
       });
@@ -30,7 +31,10 @@ router.post("/register", registerValidation(), async (req, res) => {
       displayName,
     });
     const saveUser = await newUser.save();
-    res.json(saveUser);
+    res.json({
+      result: "Success!",
+      saveUser,
+    });
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });
   }
@@ -42,6 +46,7 @@ router.post("/login", loginValidation(), async (req, res) => {
 
     if (!errors.isEmpty()) {
       return res.status(400).json({
+        result: "Error!",
         errors: errors.array(),
         message: "Incorrect data",
       });
@@ -54,6 +59,7 @@ router.post("/login", loginValidation(), async (req, res) => {
     const token = sign({ id: user._id }, config.get("JWT_Secret"));
 
     res.send({
+      result: "Success!",
       token,
       user: {
         id: user._id,

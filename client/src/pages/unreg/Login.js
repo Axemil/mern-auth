@@ -1,7 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import helper from "../../helper";
 
 const Login = () => {
+  const [email, emailInput] = helper.useInput({
+    type: "email",
+    placeholder: "Email",
+    alternate: true
+  });
+  const [password, passwordInput] = helper.useInput({
+    type: "password",
+    placeholder: "Password",
+    alternate: true
+  });
+  const inputs = [ emailInput, passwordInput ]
   return (
     <div className="unreg-page_main">
       <div className="unreg-page_card">
@@ -20,24 +32,7 @@ const Login = () => {
             🔑
           </span>
         </h2>
-        <div className="unreg-page_block-input_alternate">
-          <input
-            id="email"
-            name="email"
-            placeholder="Email"
-            type="email"
-            className="unreg-page_input"
-          />
-        </div>
-        <div className="unreg-page_block-input_alternate">
-          <input
-            id="password"
-            name="password"
-            placeholder="Password"
-            type="password"
-            className="unreg-page_input unreg-page_input_last"
-          />
-        </div>
+        {[...inputs]}
         <div className="unreg-page_block">
           <button className="unreg-page_button">Sign in</button>
         </div>

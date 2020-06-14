@@ -1,4 +1,6 @@
 $blue: rgb(47, 61, 255);
+$green: rgb(60, 255, 60);
+$red: rgb(255, 57, 57);
 .unreg-page {
   &_main {
     background-image: url("../assets/back.jpg");
@@ -114,6 +116,42 @@ $blue: rgb(47, 61, 255);
   }
 }
 
+.message{
+  &_error,&_success{
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    animation: .3s linear popup forwards;
+  }
+  &_error{
+    background: $red;
+    color: darken($red, $amount: 40);
+    box-shadow: 5px 5px 1px rgba(darken($red, $amount: 40), $alpha: 1);
+    &-submessage{
+      padding: 5px 0;
+      font-size: 0.9rem;
+      text-align: left;
+      &::before{
+        content: '❗️';
+        padding: 0 10px 0 0;
+      }
+    }
+  }
+  &_success{
+    background: $green;
+    color: darken($green, $amount: 30);
+    box-shadow: 5px 5px 1px rgba(darken($green, $amount: 30), $alpha: 1);
+  }
+  @keyframes popup{
+    from{
+      opacity: 0;
+    }
+    to{
+      opacity: 100%;
+    }
+  }
+}
+
 @media (min-width: 640px) {
   .unreg-page {
     &_main {
@@ -121,6 +159,13 @@ $blue: rgb(47, 61, 255);
     }
     &_card {
       width: 400px;
+    }
+  }
+  .message{
+    &_error{
+      &-submessage{
+        font-size: 1.1rem;
+      }
     }
   }
 }

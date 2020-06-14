@@ -1,7 +1,44 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, Redirect } from "react-router-dom";
+import helper from "../../helper";
+import useMessage from "../../helper/useMessage";
 
 const Registrate = () => {
+  const [email, emailInput] = helper.useInput({
+    type: "text",
+    label: "Email: ",
+    placeholder: "Enter email",
+  });
+  const [name, nameInput] = helper.useInput({
+    type: "text",
+    label: "Name: ",
+    placeholder: "Enter name",
+  });
+  const [password, passwordInput] = helper.useInput({
+    type: "text",
+    label: "Password: ",
+    placeholder: "Enter password",
+  });
+  const [passwordConfirm, passwordConfirmInput] = helper.useInput({
+    type: "text",
+    label: "Password confirm: ",
+    placeholder: "Reenter password",
+  });
+  const [result, error, fetching] = helper.useFetch("api/register", {
+    email,
+    password,
+    passwordCheck: passwordConfirm,
+    displayName: name,
+  });
+  const [message, setMessage] = helper.useMessage();
+
+  useEffect(() => {
+    if (result) {
+      setMessage(true, result.data);
+    } else if (error) {
+      setMessage(false, error);
+    }
+  }, [result, error]);
   return (
     <div className="unreg-page_main">
       <div className="unreg-page_card">
@@ -20,48 +57,12 @@ const Registrate = () => {
             👩‍💻
           </span>
         </h2>
-        <div className="unreg-page_block-input">
-          <label>Email: </label>
-          <input
-            id="email"
-            name="email"
-            placeholder="Enter email"
-            type="text"
-            className="unreg-page_input"
-          />
-        </div>
-        <div className="unreg-page_block-input">
-          <label>Name: </label>
-          <input
-            id="Name"
-            name="Name"
-            placeholder="Enter name"
-            type="text"
-            className="unreg-page_input"
-          />
-        </div>
-        <div className="unreg-page_block-input">
-          <label>Password: </label>
-          <input
-            id="password"
-            name="password"
-            placeholder="Enter password"
-            type="text"
-            className="unreg-page_input"
-          />
-        </div>
-        <div className="unreg-page_block-input">
-          <label style={{fontSize: "1rem"}}>Password confirm: </label>
-          <input
-            id="Password confirm"
-            name="Password confirm"
-            placeholder="Reenter password"
-            type="text"
-            className="unreg-page_input"
-          />
-        </div>
+        {message}
+        {[emailInput, nameInput, passwordInput, passwordConfirmInput]}
         <div className="unreg-page_block">
-          <button className="unreg-page_button">Sign in</button>
+          <button onClick={() => fetching()} className="unreg-page_button">
+            Sign in
+          </button>
         </div>
       </div>
     </div>
