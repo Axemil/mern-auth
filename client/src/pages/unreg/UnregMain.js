@@ -9,7 +9,7 @@ const Main = () => {
           <span aria-label="Emoji" role="img">
             🎓
           </span>{" "}
-          Authorization page{" "}
+          Telephonebook app{" "}
           <span aria-label="Emoji" role="img">
             🎓
           </span>
@@ -36,6 +36,15 @@ const Main = () => {
               ✔️
             </span>{" "}
             Registrate
+          </Link>
+        </div>
+        <p>If you are logged in:</p>
+        <div className="unreg-page_list">
+          <Link className="unreg-page_list_item" to="/main">
+            <span aria-label="Emoji" role="img">
+              📱
+            </span>{" "}
+            Working with telephone numbers
           </Link>
         </div>
       </div>

@@ -56,16 +56,14 @@ router.post("/login", loginValidation(), async (req, res) => {
 
     const user = await User.findOne({ email });
 
-    const token = sign({ id: user._id }, config.get("JWT_Secret"));
+    const token = sign(
+      { id: user._id, displayName: user.displayName, email: user.email },
+      config.get("JWT_Secret")
+    );
 
     res.send({
       result: "Success!",
       token,
-      user: {
-        id: user._id,
-        displayName: user.displayName,
-        email: user.email,
-      },
     });
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });

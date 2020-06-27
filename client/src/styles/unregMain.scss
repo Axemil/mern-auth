@@ -1,6 +1,4 @@
-$blue: rgb(47, 61, 255);
-$green: rgb(60, 255, 60);
-$red: rgb(255, 57, 57);
+@import './colors.scss';
 .unreg-page {
   &_main {
     background-image: url("../assets/back.jpg");
@@ -22,6 +20,18 @@ $red: rgb(255, 57, 57);
     background: rgb(255, 255, 255);
     box-shadow: 5px 5px 1px rgba($blue, $alpha: 1);
     padding: 10px;
+    &-error-block{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    &-error{
+      transition: .3s;
+      &:hover{
+        color: $blue;
+      }
+    }
   }
   &_card h2,
   &_card h4 {

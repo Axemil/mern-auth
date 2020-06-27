@@ -1,8 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import helper from "../../helper";
 
-const Login = () => {
+
+const Login = ({login}) => {
+  const [flag,setFlag] = useState(false)
   const [email, emailInput] = helper.useInput({
     type: "email",
     placeholder: "Email",
@@ -13,7 +15,20 @@ const Login = () => {
     placeholder: "Password",
     alternate: true
   });
-  const inputs = [ emailInput, passwordInput ]
+  const [result, error, fetching] = helper.useFetch("api/login", {
+    email,
+    password,
+  });
+  const [message, setMessage] = helper.useMessage();
+  useEffect(() => {
+    if (result) {
+      login(result.data);
+      setMessage(true, result.data);
+      setFlag(true)
+    } else if (error) {
+      setMessage(false, error);
+    }
+  }, [result, error]);
   return (
     <div className="unreg-page_main">
       <div className="unreg-page_card">
@@ -32,9 +47,11 @@ const Login = () => {
             🔑
           </span>
         </h2>
-        {[...inputs]}
+        {flag && <Redirect to="/main" />}
+        {message}
+        {[emailInput, passwordInput]}
         <div className="unreg-page_block">
-          <button className="unreg-page_button">Sign in</button>
+          <button onClick={fetching} className="unreg-page_button">Sign in</button>
         </div>
         <p>
           Don't have an account?{" "}

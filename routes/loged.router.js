@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { validationResult } = require("express-validator");
-const { verify } = require("jsonwebtoken");
+const { verify, decode } = require("jsonwebtoken");
 const config = require("config");
 const { User } = require("../models");
 const { autorizeValidation, checkAuth } = require("../middleware");
@@ -28,9 +28,9 @@ router.get("/check", autorizeValidation(), async (req, res) => {
     const token = req.header("x-auth-token");
 
     const verified = verify(token, config.get("JWT_Secret"));
-    if (!verified) throw new Error("Token authorize faild");
 
-    req.user = verified.id;
+    if (!verified) res.json({ login: false });
+    else res.json({ login: true, user: decode(token) });
   } catch (error) {
     res.status(500).json(error);
   }

@@ -1,0 +1,126 @@
+@import './colors.scss';
+@import './loadingCirlcel.scss';
+$whiteWet: rgb(255, 255, 255);
+.regged-page{
+    min-height: 100vh;
+    background: rgb(120,113,255);
+    background: linear-gradient(90deg, rgba(120,113,255,1) 16%, rgba(161,94,255,1) 50%);
+    &_block{
+        padding: 10px 2rem;
+    }
+    &_header{
+        white-space: nowrap;
+        background: $whiteWet;
+        display: flex;
+        border-bottom: 1px solid $blue;
+        justify-content: space-between;
+        align-items: center;
+        &_link{
+            padding: 10px;
+            border: 1px solid $whiteWet;
+            border-radius: 10px;
+            user-select: none;
+            cursor: pointer;
+            transition: .3s;
+            &:hover{
+                border: 1px solid $blue;
+                box-shadow: 5px 5px 1px rgba($blue, $alpha: 1);
+                transform: scale(1.01);
+            }
+        }
+        &_list{
+            display: flex;
+            &_item{
+                margin: 0 10px 0 0;
+            }
+        }
+    }
+    &_body{
+        &_welcome-block{
+            padding: 0.9rem;
+            margin: 0.9rem 0;
+            background: $whiteWet;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid $blue;
+            box-shadow: 5px 5px 1px rgba($blue, $alpha: 1);
+        }
+        &_list{
+            display: flex;
+            flex-direction: column;
+            &-profile-item{
+                text-align: left!important;
+                font-size: 1.1rem;
+                font-weight: 600;
+                line-height: 1.8rem;
+            }
+            &-button{
+                padding: 10px 0;
+                font-weight: 600;
+                font-size: 1.1rem;
+                color: $blue;
+                border-top: 5px solid $blue;
+                transition: .3s;
+                &:hover{
+                    background: $blue;
+                    color: #fff;
+                    border-bottom-left-radius: 7px;
+                    border-bottom-right-radius: 7px;
+                }
+            }
+            &-item{
+                margin: 0.9rem 0;
+                background: $whiteWet;
+                border-radius: 10px;
+                text-align: center;
+                width: 100%;
+                border: 1px solid $blue;
+                box-shadow: 5px 5px 1px rgba($blue, $alpha: 1);
+            }
+            &-item h2{
+                border-bottom: 5px solid $blue;
+                padding: 10px;
+            }
+            &-info{
+                margin: 20px;
+            }
+            
+        }
+    }
+    
+}
+
+@media (min-width: 640px) {
+    .regged-page{
+        &_block{
+            font-size: 1rem;
+            padding: 10px 4rem;
+        }
+    }
+}
+@media (min-width: 840px) {
+    .regged-page{
+        &_block{
+            padding: 10px 5rem;
+        }
+    }
+}
+@media (min-width: 1080px) {
+    .regged-page{
+        &_header{
+            padding: 10px 6rem;
+        }
+        &_body{
+            &_list{
+                display: flex;
+                flex-direction: row;
+                &-item:first-child{
+                    margin: 0 0.5rem 0 0;
+                }
+                &-item:last-child{
+                    margin: 0 0 0 0.5rem;
+                }
+            }
+        }
+    }
+}

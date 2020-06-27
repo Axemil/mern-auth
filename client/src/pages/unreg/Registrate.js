@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import helper from "../../helper";
-import useMessage from "../../helper/useMessage";
 
 const Registrate = () => {
+  const [flag, setFlag] = useState(false);
   const [email, emailInput] = helper.useInput({
     type: "text",
     label: "Email: ",
@@ -21,7 +21,7 @@ const Registrate = () => {
   });
   const [passwordConfirm, passwordConfirmInput] = helper.useInput({
     type: "text",
-    label: "Password confirm: ",
+    label: "Confirm: ",
     placeholder: "Reenter password",
   });
   const [result, error, fetching] = helper.useFetch("api/register", {
@@ -35,6 +35,7 @@ const Registrate = () => {
   useEffect(() => {
     if (result) {
       setMessage(true, result.data);
+      setTimeout(() => setFlag(true), 3000)
     } else if (error) {
       setMessage(false, error);
     }
@@ -57,10 +58,11 @@ const Registrate = () => {
             👩‍💻
           </span>
         </h2>
+        {flag && <Redirect to="/login"/>}
         {message}
         {[emailInput, nameInput, passwordInput, passwordConfirmInput]}
         <div className="unreg-page_block">
-          <button onClick={() => fetching()} className="unreg-page_button">
+          <button onClick={fetching} className="unreg-page_button">
             Sign in
           </button>
         </div>
