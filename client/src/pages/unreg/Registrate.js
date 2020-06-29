@@ -39,7 +39,7 @@ const Registrate = () => {
     } else if (error) {
       setMessage(false, error);
     }
-  }, [result, error]);
+  }, [result, error, setMessage]);
   return (
     <div className="unreg-page_main">
       <div className="unreg-page_card">

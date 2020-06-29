@@ -13,7 +13,7 @@ const usePage = (Page) => {
         setFlag(data.login);
       }
     });
-  }, [flag]);
+  }, [flag, getInfo]);
   return flag === true ? (
     <Page user={user} />
   ) : (
@@ -28,7 +28,7 @@ const usePage = (Page) => {
             🤔
           </span>{" "}
         </h2>
-        <div class="lds-roller">
+        <div className="lds-roller">
           <div></div>
           <div></div>
           <div></div>

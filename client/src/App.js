@@ -7,9 +7,9 @@ import helper from "./helper";
 
 function App() {
   const postData = helper.useCheck()
-  const [user, setUser] = useState(null)
-  const login = async (info) => {
-    await postData("api/check", info.token).then((data) => {
+  const [, setUser] = useState(null)
+  const login = (info) => {
+    postData("api/check", info.token).then((data) => {
       data.login === true ? localStorage.setItem('token', info.token) : localStorage.setItem('token', false)
     });
     setUser(info.user)

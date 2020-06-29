@@ -12,7 +12,7 @@ app.use(cors());
 app.use("/api", unregistered);
 app.use("/api", loged);
 
-const PORT = process.env.PORT || config.get("PORT") || 5000;
+const PORT = 5000;
 
 const start = async () => {
   try {

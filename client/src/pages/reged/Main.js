@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Main = ({ user }) => {
-  const [info, setInfo] = useState(user);
+  const [info, ] = useState(user);
 
   return (
     <div className="regged-page">
@@ -58,6 +58,10 @@ const Main = ({ user }) => {
           </div>
           <div className="regged-page_body_list-item">
             <h2>View messages</h2>
+            <div className="regged-page_body_list-info"></div>
+            <Link to="/main/message">
+              <div className="regged-page_body_list-button">Work with messages</div>
+            </Link>
           </div>
         </div>
       </div>

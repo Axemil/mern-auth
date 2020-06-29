@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const useFetch = (setting, data) => {

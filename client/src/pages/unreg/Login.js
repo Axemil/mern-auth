@@ -28,7 +28,7 @@ const Login = ({login}) => {
     } else if (error) {
       setMessage(false, error);
     }
-  }, [result, error]);
+  }, [result, error, login, setMessage]);
   return (
     <div className="unreg-page_main">
       <div className="unreg-page_card">
