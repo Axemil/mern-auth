@@ -3,7 +3,11 @@ const { validationResult } = require("express-validator");
 const { verify, decode } = require("jsonwebtoken");
 const config = require("config");
 const { User, Message } = require("../models");
-const { autorizeValidation, checkAuth, messageValidation } = require("../middleware");
+const {
+  autorizeValidation,
+  checkAuth,
+  messageValidation,
+} = require("../middleware");
 
 router.delete("/delete", autorizeValidation(), checkAuth, async (req, res) => {
   try {
@@ -36,7 +40,7 @@ router.get("/check", autorizeValidation(), async (req, res) => {
   }
 });
 
-router.post("/message", messageValidation() ,async (req, res) => {
+router.post("/post-message", messageValidation(), async (req, res) => {
   try {
     const errors = validationResult(req);
 
@@ -47,22 +51,43 @@ router.post("/message", messageValidation() ,async (req, res) => {
         message: "Incorrect data",
       });
     }
-    
     const { text, author } = req.body;
 
     const newMessage = new Message({
       text,
-      author
-    })
-    const saveMessage = await newMessage.save()
-
-    res.json({
-      saveMessage
-    })
-
+      author,
+    });
+    const saveMessage = await newMessage.save();
+    res.json({ saveMessage });
   } catch (error) {
     res.status(500).json(error);
   }
-})
+});
+
+router.get("/get-messages", async (req, res) => {
+  try {
+    const sort = req.header("sort") || "addedAt";
+    const sortValue = req.header("sortValue") || "desc";
+    const limit = req.header("limit") || 20;
+    const skip = req.header("skip") || 0;
+    const messages = await Message.find({});
+
+    const limitedArray = messages.slice(skip, limit);
+
+    const byField = (field) => {
+      if (sortValue === "desc") {
+        return (a, b) => (a[field] > b[field] ? 1 : -1);
+      }
+      if (sortValue === "asc") {
+        return (a, b) => (a[field] < b[field] ? 1 : -1);
+      }
+    };
+
+    const result = limitedArray.sort(byField(sort));
+    res.json({ result });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 module.exports = router;

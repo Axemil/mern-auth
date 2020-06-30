@@ -1,36 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import Header from "./parts/Header"
 
 const Main = ({ user }) => {
-  const [info, ] = useState(user);
+  const [info] = useState(user);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    axios.get("api/get-messages").then(({ data }) => setMessages(data.result));
+  }, [ info ]);
 
   return (
     <div className="regged-page">
-      <div className="regged-page_header regged-page_block">
-        <Link to="/main">
-          <h2 className="regged-page_header_logo regged-page_header_link">
-            <span aria-label="Emoji" role="img">
-              ☎️
-            </span>{" "}
-            Tel.App{" "}
-            <span aria-label="Emoji" role="img">
-              ☎️
-            </span>
-          </h2>
-        </Link>
-        <div className="regged-page_header_list">
-          <Link to="/main/messages">
-            <div className="regged-page_header_list_item regged-page_header_link">
-              Messages
-            </div>
-          </Link>
-          <Link to="/main/profile">
-            <div className="regged-page_header_list_item regged-page_header_link">
-              Profile
-            </div>
-          </Link>
-        </div>
-      </div>
+      <Header />
       <div className="regged-page_body regged-page_block">
         <div className="regged-page_body_welcome-block">
           <h2>
@@ -58,9 +41,20 @@ const Main = ({ user }) => {
           </div>
           <div className="regged-page_body_list-item">
             <h2>View messages</h2>
-            <div className="regged-page_body_list-info"></div>
-            <Link to="/main/message">
-              <div className="regged-page_body_list-button">Work with messages</div>
+            <div className="regged-page_body_list-info">
+              {messages.map(({ text, author }, index, array) => (
+                <div key={index} className="regged-page_body_list-message">
+                  <p className="regged-page_body_list-message-text">{text}</p>{" "}
+                  <p className="regged-page_body_list-message-author">
+                    {author}
+                  </p>{" "}
+                </div>
+              ))}
+            </div>
+            <Link to="/message">
+              <div className="regged-page_body_list-button">
+                Work with messages
+              </div>
             </Link>
           </div>
         </div>

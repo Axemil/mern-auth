@@ -48,6 +48,44 @@ $whiteWet: rgb(255, 255, 255);
         &_list{
             display: flex;
             flex-direction: column;
+            &-error-block{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            &-error{
+                width: 50%;
+            }
+            &-messages{
+                &-input{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0 0 10px 0;
+                    & input{
+                        width: 80%;
+                        border: 1px solid $blue;
+                        outline: none;
+                        padding: 5px;
+                        border-top-left-radius: 10px;
+                        border-bottom-left-radius: 10px;
+                    }
+                }
+            }
+            &-message{
+                text-align: right!important;
+                margin: 10px 0;
+                &-text{
+                    display: inline-block;
+                    padding: 10px!important;
+                    background: $blue;
+                    border-radius: 10px;
+                    color: #fff;
+                }
+                &-author{
+                    font-size: 0.8rem;
+                }
+            }
             &-profile-item{
                 text-align: left!important;
                 font-size: 1.1rem;
@@ -80,6 +118,7 @@ $whiteWet: rgb(255, 255, 255);
                 justify-content: center;
                 align-items: space-between;
                 flex-direction: column;
+
             }
             &-item h2{
                 border-bottom: 5px solid $blue;
@@ -88,10 +127,76 @@ $whiteWet: rgb(255, 255, 255);
             &-info{
                 margin: 20px;
             }
+            &-info form{
+                display: flex;
+                padding: 10px 0;
+                border-right: 3px solid $blue;
+                & .input{
+                    padding: 10px;
+                    border: 3px solid $blue;
+                    color: $blue;
+                    cursor: pointer;
+                    border-radius: 10px;
+                    transition: .3s;
+                    &:hover{
+                        background: $blue;
+                        color: #fff;
+                    }
+                }
+            }
+            &-info form:last-child{
+                border: none;
+            }
+            &-info .radio{
+                padding: 10px;
+                margin: 0 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: $blue;
+                color: #fff;
+                border-radius: 10px;
+            }
+            &-info .number-input{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                margin: 0 10px;
+                background: $blue;
+                color: #fff;
+                border-radius: 10px;
+            }
+            &-info form label{
+                display: flex;
+                align-items: center;
+            }
+            &-info p{
+                padding: 0 0 0 5px;
+            }
+            &-radios{
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
             
         }
     }
     
+}
+.regged-page_body_list-messages-submit{
+    border: 1px solid $blue;
+    border-left: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: $blue;
+    padding: 1.5px;
+    transition: .3s;
+    &:hover{
+        background: $blue;
+        color: #fff;
+        cursor: pointer;
+    }
 }
 
 @media (min-width: 640px) {
@@ -118,6 +223,7 @@ $whiteWet: rgb(255, 255, 255);
             &_list{
                 display: flex;
                 flex-direction: row;
+                align-items: flex-start;
                 &-item:first-child{
                     margin: 0 0.5rem 0 0;
                 }

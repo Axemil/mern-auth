@@ -11,6 +11,8 @@ const Router = ({ login }) => {
         <Route path="/registrate" exact component={Pages.Registrate} />{" "}
         <Route path="/login" exact component={() => <Pages.Login login={login} />} />
         <Route path="/main" exact component={() => helper.usePage(Pages.Main)} />
+        <Route path="/message" exact component={() => helper.usePage(Pages.Messages)} />
+        
       </Switch>
     );
   };

@@ -12,7 +12,7 @@ const useMessage = () => {
                 <span aria-label="Emoji" role="img">
                   🥳
                 </span>{" "}
-                {data.result}{" "}
+                Success
                 <span aria-label="Emoji" role="img">
                   🥳
                 </span>

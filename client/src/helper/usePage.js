@@ -13,7 +13,7 @@ const usePage = (Page) => {
         setFlag(data.login);
       }
     });
-  }, [flag, getInfo]);
+  }, [flag]);
   return flag === true ? (
     <Page user={user} />
   ) : (
