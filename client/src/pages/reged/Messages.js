@@ -169,14 +169,22 @@ const Messages = ({ user }) => {
                 </form>
               </div>
               <div className="regged-page_body_list-messages">
-                {messages.map(({ text, author }, index, array) => (
-                  <div key={index} className="regged-page_body_list-message">
-                    <p className="regged-page_body_list-message-text">{text}</p>{" "}
-                    <p className="regged-page_body_list-message-author">
-                      {author}
-                    </p>{" "}
-                  </div>
-                ))}
+                {messages.map(({ text, author, deletedAt }, index, array) => {
+                  if (!deletedAt)
+                    return (
+                      <div
+                        key={index}
+                        className="regged-page_body_list-message"
+                      >
+                        <p className="regged-page_body_list-message-text">
+                          {text}
+                        </p>{" "}
+                        <p className="regged-page_body_list-message-author">
+                          {author}
+                        </p>{" "}
+                      </div>
+                    );
+                })}
               </div>
               <div className="regged-page_body_list-messages-input">
                 <input

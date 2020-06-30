@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Header from "./parts/Header"
+import Header from "./parts/Header";
 
 const Main = ({ user }) => {
   const [info] = useState(user);
@@ -9,7 +9,7 @@ const Main = ({ user }) => {
 
   useEffect(() => {
     axios.get("api/get-messages").then(({ data }) => setMessages(data.result));
-  }, [ info ]);
+  }, [info]);
 
   return (
     <div className="regged-page">
@@ -42,14 +42,19 @@ const Main = ({ user }) => {
           <div className="regged-page_body_list-item">
             <h2>View messages</h2>
             <div className="regged-page_body_list-info">
-              {messages.map(({ text, author }, index, array) => (
-                <div key={index} className="regged-page_body_list-message">
-                  <p className="regged-page_body_list-message-text">{text}</p>{" "}
-                  <p className="regged-page_body_list-message-author">
-                    {author}
-                  </p>{" "}
-                </div>
-              ))}
+              {messages.map(({ text, author, deletedAt }, index, array) => {
+                if (!deletedAt)
+                  return (
+                    <div key={index} className="regged-page_body_list-message">
+                      <p className="regged-page_body_list-message-text">
+                        {text}
+                      </p>{" "}
+                      <p className="regged-page_body_list-message-author">
+                        {author}
+                      </p>{" "}
+                    </div>
+                  );
+              })}
             </div>
             <Link to="/message">
               <div className="regged-page_body_list-button">
