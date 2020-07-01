@@ -22,9 +22,10 @@ const Login = ({login}) => {
   const [message, setMessage] = helper.useMessage();
   useEffect(() => {
     if (result) {
-      login(result.data);
-      setMessage(true, result.data);
-      setFlag(true)
+      setMessage(true);
+      setTimeout(() => {
+        login(result.data)
+      }, 2000);
     } else if (error) {
       setMessage(false, error);
     }
