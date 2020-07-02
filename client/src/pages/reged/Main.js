@@ -42,9 +42,9 @@ const Main = ({ user }) => {
           <div className="regged-page_body_list-item">
             <h2>View messages</h2>
             <div className="regged-page_body_list-info">
-              {messages.map(({ text, author, deletedAt }, index, array) => {
-                if (!deletedAt)
-                  return (
+              {messages.map(({ text, author, deletedAt }, index) => {
+                return (
+                  !deletedAt && (
                     <div key={index} className="regged-page_body_list-message">
                       <p className="regged-page_body_list-message-text">
                         {text}
@@ -53,7 +53,8 @@ const Main = ({ user }) => {
                         {author}
                       </p>{" "}
                     </div>
-                  );
+                  )
+                );
               })}
             </div>
             <Link to="/message">

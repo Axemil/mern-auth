@@ -20,7 +20,6 @@ const Login = ({login}) => {
     password,
   });
   const [message, setMessage] = helper.useMessage();
-  const postData = helper.useCheck()
   useEffect(() => {
     if (result) {
       setMessage(true);

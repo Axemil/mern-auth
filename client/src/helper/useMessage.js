@@ -4,7 +4,6 @@ const useMessage = () => {
   const [result, setResult] = useState(null);
   const message = useCallback((flag, data = "") => {
     if (flag) {
-      console.log("True");
       setResult(
         <div className="message_success">
           <p>
