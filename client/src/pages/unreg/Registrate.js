@@ -35,7 +35,7 @@ const Registrate = () => {
   useEffect(() => {
     if (result) {
       setMessage(true, result.data);
-      setTimeout(() => setFlag(true), 3000)
+      setTimeout(() => setFlag(true), 1000)
     } else if (error) {
       setMessage(false, error);
     }

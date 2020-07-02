@@ -20,12 +20,12 @@ const Login = ({login}) => {
     password,
   });
   const [message, setMessage] = helper.useMessage();
+  const postData = helper.useCheck()
   useEffect(() => {
     if (result) {
       setMessage(true);
-      setTimeout(() => {
-        login(result.data)
-      }, 2000);
+      localStorage.setItem('token', result.data.token)
+      setTimeout(() => setFlag(true),1000)
     } else if (error) {
       setMessage(false, error);
     }
@@ -33,12 +33,6 @@ const Login = ({login}) => {
   return (
     <div className="unreg-page_main">
       <div className="unreg-page_card">
-        <Link className="unreg-page_button-back" to="/">
-          {" "}
-          <span aria-label="Emoji" role="img">
-            👈
-          </span>
-        </Link>
         <h2>
           <span aria-label="Emoji" role="img">
             🔑
@@ -48,7 +42,7 @@ const Login = ({login}) => {
             🔑
           </span>
         </h2>
-        {flag && <Redirect to="/main" />}
+        {flag && <Redirect to="/" />}
         {message}
         {[emailInput, passwordInput]}
         <div className="unreg-page_block">
