@@ -1,0 +1,60 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 2rem;
+  box-shadow: 0 1px 10px 0 rgba(rgb(0, 0, 0), 0.3);
+  &_logo {
+    user-select: none;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: $blue;
+  }
+  &_drop-down {
+    user-select: none;
+    position: relative;
+    &_icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &-dot {
+        width: 6px;
+        height: 6px;
+        background: $blue;
+        border-radius: 50%;
+        margin: 0 3px;
+      }
+    }
+    &_menu {
+      position: absolute;
+      left: -105px;
+      top: 15px;
+      width: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: rgb(255, 255, 255);
+      box-shadow: 0 0 10px 0 rgba(rgb(0, 0, 0), $alpha: 0.2);
+      &-item {
+        padding: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        color: $blue;
+        width: 100%;
+        font-weight: 600;
+        &:hover {
+          background: rgb(240, 240, 240);
+        }
+      }
+    }
+  }
+}
+@media (min-width: 1080px) {
+    .header{
+        &_burger-menu{
+            display: none;
+        }
+    }
+}

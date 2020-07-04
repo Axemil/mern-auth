@@ -1,0 +1,8 @@
+.main{
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    &_page{
+        flex-grow: 20;
+    }
+}
