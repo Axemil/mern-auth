@@ -1,8 +1,8 @@
 .main{
     display: flex;
     justify-content: space-between;
-    height: 100vh;
+    min-height: 100vh;
     &_page{
-        flex-grow: 20;
+        width: 100vw;
     }
 }

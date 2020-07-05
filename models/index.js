@@ -1,7 +1,7 @@
 const User = require("./user.model");
-const Message = require("./message.model")
+const Contact = require("./contact.model");
 
 module.exports = {
   User,
-  Message
+  Contact,
 };

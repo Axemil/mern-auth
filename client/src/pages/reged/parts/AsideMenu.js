@@ -1,14 +1,21 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
-const AsideMenu = ({ info }) => {
+const AsideMenu = ({ info, burger }) => {
   const [flag, setFlag] = useState(false);
+  const [text, setText] = useState("");
   const handleLogOut = () => {
-      localStorage.setItem('token', '');
-      setFlag(!flag)
-  }
+    localStorage.setItem("token", "");
+    setFlag(!flag);
+  };
+  const handleText = (e) => setText(e.target.value);
+  const handleSubmit = () => {
+    if (text !== "") {
+      console.log(text);
+    }
+  };
   return (
-    <div class="menu__box-aside">
+    <div className={burger ? "menu__box" : "menu__box-aside"}>
       {flag && <Redirect to="/login" />}
       <Link to="/">
         <h1 className="menu__box-aside-logo menu__box-aside-link">
@@ -24,10 +31,33 @@ const AsideMenu = ({ info }) => {
           <p onClick={handleLogOut}>Log out</p>
         </div>
       </div>
-      <form className="menu__box-aside__search">
-          <input className="menu__box-aside__search-input" type="text" placeholder="Search for a contact"/>
-          <input className="menu__box-aside__search-submit" type="submit" value="🔍" />
+      <form onSubmit={handleSubmit} className="menu__box-aside__search">
+        <input
+          className="menu__box-aside__search-input"
+          value={text}
+          type="text"
+          onChange={handleText}
+          placeholder="Search for a contact"
+        />
+        <input
+          className="menu__box-aside__search-submit"
+          type="submit"
+          value="🔍"
+        />
       </form>
+      <div className="menu__box-aside__categories">
+        <div className="menu__box-aside__categories-label">
+          <h2>Categories</h2>
+        </div>
+        <div className="menu__box-aside__categories-item">All</div>
+        <div className="menu__box-aside__categories-item">Work</div>
+        <div className="menu__box-aside__categories-item">Famalie</div>
+      </div>
+      <div className="menu__box-aside__new-contact menu__box-aside-link">
+        <Link to="/new-contact">
+          <p>Add new contact</p>
+        </Link>
+      </div>
     </div>
   );
 };

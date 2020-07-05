@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import SideMenu from './SideMenu';
 import DropDown from './DropDown';
 
-const Header = () => {
+const Header = ({ info, label }) => {
   return (
     <div className="header">
-      <SideMenu />
+      <SideMenu info={info} burger={true}/>
       <div className="header_logo">
-        All contacts
+        {label}
       </div>
       <DropDown />
     </div>

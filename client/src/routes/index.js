@@ -7,10 +7,10 @@ import helper from "../helper"
 const Router = () => {
     return (
       <Switch>
-        <Route path="/" exact component={() => helper.usePage(Pages.Main)} />
+        <Route path="/" exact component={() => helper.usePage(Pages.Main, 'All contacts')} />
+        <Route path="/new-contact" exact component={() => helper.usePage(Pages.AddContact, 'Add new contact')} />
         <Route path="/registrate" exact component={Pages.Registrate} />{" "}
         <Route path="/login" exact component={Pages.Login} />
-        <Route path="/message" exact component={() => helper.usePage(Pages.Messages)} />
       </Switch>
     );
   };

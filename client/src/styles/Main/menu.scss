@@ -1,14 +1,19 @@
 .menu__box-aside{
-    flex-grow: 1;
-    display: none;
+    display: block;
   
-    width: 300px;
-    height: 100%;
+    width: 700px;
+    height: 100vh;
+    padding: 0 30px;
   
     background-color: rgb(57, 79, 121);
     box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
   
     transition-duration: 0.25s;
+    &-burger{
+        position: absolute;
+        visibility: hidden;
+        left: -100%;
+    }
     &-link{
         transition: .3s;
         &:hover{
@@ -16,9 +21,16 @@
         }
     }
     &-logo{
-        padding: 20px 10px 0;
+        padding: 20px 0 0 0;
         text-align: center;
-        color: #fff;        
+        color: #fff;     
+        font-size: 1.2rem;
+
+    }
+    &-logo::before,
+    &-logo::after{
+        padding: 0 5px;
+        content: '☎️';
     }
     &__user{
         display: flex;
@@ -30,6 +42,14 @@
             width: 55px;
             height: 55px;
             border-radius: 50%;
+            position: relative;
+            &::before{
+                content: '👨‍💻';
+                position: absolute;
+                top: 10%;
+                left: 10%;
+                font-size: 2rem;
+            }
         }
         &-info{
             color: #fff;
@@ -39,12 +59,15 @@
             & p{
                 color: $blue;
                 cursor: pointer;
+                &:hover{
+                    text-decoration: underline;
+                }
             }
         }
     }
     &__search{
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         font: 14px/1.4 'Roboto'!important;
         &-input{
@@ -53,8 +76,7 @@
             border-bottom-left-radius: 10px;
             outline: none;
             border: none;
-            width: 70%;
-            box-shadow: 5px 5px 1px rgba($blue, $alpha: 1);
+            width: 100%;
         }
         &-submit{
             padding: 4px;
@@ -64,18 +86,41 @@
             border: none;
             outline: none;
             transition: .3s;
-            box-shadow: 5px 5px 1px rgba(#fff, $alpha: 1);
             &:hover{
                 background: #fff;
                 cursor: pointer;
-                box-shadow: 5px 5px 1px rgba($blue, $alpha: 1);
             }
         }
     }
-}
-
-@media (min-width: 1080px){
-    .menu__box-aside{
-        display: block;
+    &__categories{
+        margin: 30px 0;
+        &-label{
+            color: #fff;
+            user-select: none;
+        }
+        &-item{
+            padding: 10px 0;
+            font-size: 1.1rem;
+            transition: .3s;
+            color: #fff;
+            cursor: pointer;
+            &:hover{
+                color: $blue;
+            }
+            &:last-child{
+                padding: 10px 0 0 0;
+            }
+        }
+    }
+    &__new-contact{
+        color: #fff;
+        & p{
+            font-size: 1.3rem;
+            text-align: center;
+            &::before{
+                padding: 0 5px 0 0;
+                content: '❎';
+            }
+        }
     }
 }

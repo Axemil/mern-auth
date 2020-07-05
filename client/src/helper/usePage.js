@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import helper from "../helper";
+import Header from "../pages/reged/parts/Header";
+import AsideMenu from "../pages/reged/parts/AsideMenu";
 
-const usePage = (Page) => {
+const usePage = (Page, label, dots = false) => {
   const [flag, setFlag] = useState(null);
   const [user, setUser] = useState();
   const getInfo = helper.useCheck();
@@ -18,11 +20,16 @@ const usePage = (Page) => {
   }, [flag]);
   if (flag !== null) {
     if (flag === true) {
-      return <Page user={user} />;
-    } else if (flag === false) {
       return (
-        <Redirect to="/login" />
+        <div className="main">
+          <div className="main_page">
+            <Header info={user} label={label}/>
+            <Page user={user}/>
+          </div>
+        </div>
       );
+    } else if (flag === false) {
+      return <Redirect to="/login" />;
     }
   } else
     return (

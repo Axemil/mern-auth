@@ -1,0 +1,86 @@
+.page-block{
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    &__contact{
+        margin: 30px 0;  
+        font-size: 1rem;
+        padding: 10px;
+        width: 100%;
+        background: $blue;
+        color: #fff;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-pic{
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border-radius: 50%;
+            position: relative;
+            &::before{
+                content: '👨‍💻';
+                position: absolute;
+                z-index: 1;
+                top: 15%;
+                left: 13%;
+                font-size: 1.5rem;
+            }
+        }
+        &-info{
+            padding: 0 20px;
+        }
+        &-info p:first-child{
+            font-size: 1.1rem;
+        }
+        &-dots{
+            &-block{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &-item{
+                    margin: 0 2px;
+                    width: 5px;
+                    height: 5px;
+                    background: #fff;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+    &__label{
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 600;
+        align-self: center;
+        transition: .3s;
+        &::before{
+            padding: 0 5px 0 0;
+            content: '❎';
+        }
+        &:hover{
+            color: $blue;
+        }
+    }
+}
+
+@media (min-width: 840px){
+    .page-block{
+        &__contact{
+            width: 45%;
+            margin: 20px;
+        }
+    }
+}
+
+@media (min-width: 1040px){
+    .page-block{
+        &__contact{
+            width: 20%;
+            margin: 20px;
+        }
+    }
+}
