@@ -4,7 +4,7 @@ import helper from "../helper";
 import Header from "../pages/reged/parts/Header";
 import AsideMenu from "../pages/reged/parts/AsideMenu";
 
-const usePage = (Page, label, dots = false) => {
+const usePage = (Page, label, dots = false, category = "All") => {
   const [flag, setFlag] = useState(null);
   const [user, setUser] = useState();
   const getInfo = helper.useCheck();
@@ -23,8 +23,8 @@ const usePage = (Page, label, dots = false) => {
       return (
         <div className="main">
           <div className="main_page">
-            <Header info={user} label={label}/>
-            <Page user={user}/>
+            <Header info={user} label={label} dots={dots}/>
+            <Page user={user} filter={category}/>
           </div>
         </div>
       );

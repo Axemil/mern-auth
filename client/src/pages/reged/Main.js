@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Main = ({ user }) => {
+const Main = ({ user, filter }) => {
   const [info] = useState(user);
   const [contacts, setContacts] = useState([]);
 
@@ -17,24 +17,28 @@ const Main = ({ user }) => {
     <div className="page">
       <div className="page-block">
         {contacts.length > 0 ? (
-          contacts.map(({ name, surname, phone }, index) => (
-            <div key={index} className="page-block__contact">
-              <div className="page-block__contact-pic"></div>
-              <div className="page-block__contact-info">
-                <p>
-                  {name} {surname}
-                </p>
-                <p>{phone}</p>
-              </div>
-              <div className="page-block__contact-dots">
-                <div className="page-block__contact-dots-block">
-                  <div className="page-block__contact-dots-block-item"></div>
-                  <div className="page-block__contact-dots-block-item"></div>
-                  <div className="page-block__contact-dots-block-item"></div>
+          contacts.map(({ name, surname, phone, category, _id }) => {
+            const contact = (
+              <div key={_id} className="page-block__contact">
+                <div className="page-block__contact-pic"></div>
+                <div className="page-block__contact-info">
+                  <p>
+                    {name} {surname}, {category}
+                  </p>
+                  <p>{phone}</p>
+                </div>
+                <div className="page-block__contact-dots">
+                  <div className="page-block__contact-dots-block">
+                    <div className="page-block__contact-dots-block-item"></div>
+                    <div className="page-block__contact-dots-block-item"></div>
+                    <div className="page-block__contact-dots-block-item"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
+            );
+            if(filter === 'All') return contact;
+            else if (filter === category) return contact;
+          })
         ) : (
           <h2 className="page-block__label">
             <Link to="/new-contact">Add new contact</Link>

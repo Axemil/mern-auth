@@ -49,9 +49,15 @@ const AsideMenu = ({ info, burger }) => {
         <div className="menu__box-aside__categories-label">
           <h2>Categories</h2>
         </div>
-        <div className="menu__box-aside__categories-item">All</div>
-        <div className="menu__box-aside__categories-item">Work</div>
-        <div className="menu__box-aside__categories-item">Famalie</div>
+        <Link to="/">
+          <div className="menu__box-aside__categories-item">All</div>
+        </Link>
+        <Link to="/work">
+          <div className="menu__box-aside__categories-item">Work</div>
+        </Link>
+        <Link to="/family">
+          <div className="menu__box-aside__categories-item">Family</div>
+        </Link>
       </div>
       <div className="menu__box-aside__new-contact menu__box-aside-link">
         <Link to="/new-contact">

@@ -6,6 +6,9 @@
   "scripts": {
     "client-install": "cd client && yarn add",
     "lint": "eslint client/**/*.js",
+    "build": "cd client && yarn run build",
+    "install-client": "cd client && yarn install",
+    "herokt-postbuild": "npm run install-client && npm run build",
     "start": "node app.js",
     "server": "nodemon app.js",
     "client": "npm start --prefix client",

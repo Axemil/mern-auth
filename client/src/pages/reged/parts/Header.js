@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import SideMenu from './SideMenu';
 import DropDown from './DropDown';
 
-const Header = ({ info, label }) => {
+const Header = ({ info, label, dots }) => {
   return (
     <div className="header">
       <SideMenu info={info} burger={true}/>
       <div className="header_logo">
         {label}
       </div>
-      <DropDown />
+      {dots && <DropDown />}
     </div>
   );
 };

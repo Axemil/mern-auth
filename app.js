@@ -12,28 +12,22 @@ app.use(cors());
 app.use("/api", unregistered);
 app.use("/api", loged);
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-const start = async () => {
-  try {
-    await mongoose.connect(
-      config.get("MongoURI"),
-      {
-        useCreateIndex: true,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      },
-      (error) => {
-        if (error) throw error;
-      }
-    );
-    app.listen(PORT, () =>
-      console.log(`Ther server has started on port ${PORT}`)
-    );
-  } catch (e) {
-    console.log(e);
-    process.emit(1);
+mongoose.connect(
+  process.env.MONGODB_URI || config.get("MongoURI"),
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (error) => {
+    if (error) throw error;
   }
-};
+);
 
-start();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+app.listen(PORT, () => console.log(`Ther server has started on port ${PORT}`));
