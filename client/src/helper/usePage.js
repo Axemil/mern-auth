@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import helper from "../helper";
 import Header from "../pages/reged/parts/Header";
-import AsideMenu from "../pages/reged/parts/AsideMenu";
+import axios from "axios";
 
 const usePage = (Page, label, dots = false, category = "All") => {
   const [flag, setFlag] = useState(null);
   const [user, setUser] = useState();
-  const getInfo = helper.useCheck();
   useEffect(() => {
-    getInfo("api/check", localStorage.getItem("token")).then((data) => {
-      if (data.login === true) {
-        setUser(data.user);
-        setFlag(data.login);
-      } else {
-        setFlag(false);
-      }
-    });
-  }, [flag]);
+    axios
+      .get("api/check", {
+        headers: { "x-auth-token": localStorage.getItem("token") },
+      })
+      .then(({ data }) => {
+        if (data.login === true) {
+          setUser(data.user);
+          setFlag(data.login);
+        } else {
+          setFlag(false);
+        }
+      });
+  }, [Page]);
   if (flag !== null) {
     if (flag === true) {
       return (
         <div className="main">
           <div className="main_page">
-            <Header info={user} label={label} dots={dots}/>
-            <Page user={user} filter={category}/>
+            <Header info={user} label={label} dots={dots} />
+            <Page user={user} filter={category} />
           </div>
         </div>
       );

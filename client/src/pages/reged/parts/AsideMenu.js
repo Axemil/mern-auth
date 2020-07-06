@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 const AsideMenu = ({ info, burger }) => {
   const [flag, setFlag] = useState(false);
   const [text, setText] = useState("");
+  const [categoryes] = useState(info.categoryes)
   const handleLogOut = () => {
     localStorage.setItem("token", "");
     setFlag(!flag);
@@ -42,22 +43,18 @@ const AsideMenu = ({ info, burger }) => {
         <input
           className="menu__box-aside__search-submit"
           type="submit"
-          value="🔍"
+          value="🔝"
         />
       </form>
       <div className="menu__box-aside__categories">
         <div className="menu__box-aside__categories-label">
           <h2>Categories</h2>
         </div>
-        <Link to="/">
-          <div className="menu__box-aside__categories-item">All</div>
-        </Link>
-        <Link to="/work">
-          <div className="menu__box-aside__categories-item">Work</div>
-        </Link>
-        <Link to="/family">
-          <div className="menu__box-aside__categories-item">Family</div>
-        </Link>
+        {categoryes.map((data, index) => (
+          <Link key={index} to={data === "All" ? "/" : "/" + data.toLowerCase()}>
+            <div className="menu__box-aside__categories-item">{data}</div>
+          </Link>
+        ))}
       </div>
       <div className="menu__box-aside__new-contact menu__box-aside-link">
         <Link to="/new-contact">

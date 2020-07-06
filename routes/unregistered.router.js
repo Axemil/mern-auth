@@ -57,7 +57,12 @@ router.post("/login", loginValidation(), async (req, res) => {
     const user = await User.findOne({ email });
 
     const token = sign(
-      { id: user._id, displayName: user.displayName, email: user.email },
+      {
+        id: user._id,
+        displayName: user.displayName,
+        email: user.email,
+        categoryes: user.categories,
+      },
       config.get("JWT_Secret")
     );
 
