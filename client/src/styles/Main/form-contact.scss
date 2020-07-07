@@ -1,27 +1,59 @@
 .page_add-contact{
-    padding: 30px;
+    margin: 30px 70px;
+    border: 1px solid $blue;
+    box-shadow: 5px 5px 1px rgba($blue, $alpha: 1);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    & label{
-        padding: 30px 0;
-        font-size: 1.3rem;
+    &-item{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &_block-message{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
     }
-    & input{
+    & label{
+        width: 100px;
+        text-align: center;
+        padding: 30px 0;
+        font-size: 1.3rem;
+    }
+    & input, & select{
+        font-size: 1.1rem;
         margin: 10px;
         display: block;
-        width: 100%;
         outline: none;
-        border: 3px solid $blue;
+        border: none;
+        box-shadow: 5px 5px 1px rgba($blue, $alpha: 1);
         padding: 10px;
+        width: 80%;
         color: $blue;
         border-radius: 10px;
-        background: rgb(241, 241, 241);
+        background: rgb(236, 236, 236);
+    }
+    & select{
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        &>option{
+            outline: none;
+            &:hover{
+                border: none;
+                background: $blue;
+            }
+        }
     }
     &__button-bar{
         padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
         & button{
             padding: 10px;
             margin: 0 10px;

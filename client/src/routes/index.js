@@ -11,7 +11,7 @@ const Router = () => {
       headers: {"x-auth-token": localStorage.getItem('token')}
     }).then(({ data }) => {
       if (data.login === true) {
-        setUser(data.user.categoryes)
+        setUser(data.user.categories)
       }
     })
   }, []);

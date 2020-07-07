@@ -34,7 +34,11 @@ router.get("/check", autorizeValidation(), async (req, res) => {
     const verified = verify(token, config.get("JWT_Secret"));
 
     if (!verified) res.json({ login: false });
-    else res.json({ login: true, user: decode(token) });
+    else {
+      const { email } = decode(token);
+      const findedUser = await User.findOne({ email });
+      res.json({ login: true, user: findedUser });
+    }
   } catch (error) {
     res.status(500).json(error);
   }

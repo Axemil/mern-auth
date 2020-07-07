@@ -4,12 +4,12 @@ import helper from "../../helper";
 
 const AddContact = ({ user }) => {
   const [info] = useState(user);
-  const [flag, setFlag] = useState(false)
+  const [flag, setFlag] = useState(false);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("All");
   const [result, error, fetching] = helper.useFetch("api/post-contact", {
     author: info.email,
     name,
@@ -30,52 +30,51 @@ const AddContact = ({ user }) => {
   return (
     <div className="page_add-contact">
       {flag && <Redirect to="/" />}
-      <label>
-        Name:
+      <div className="page_add-contact-item">
+        <label>Name:</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Input name"
         />
-      </label>
-      <label>
-        Surname:
+      </div>
+      <div className="page_add-contact-item">
+        <label>Surname:</label>
         <input
           type="text"
           value={surname}
           onChange={(e) => setSurname(e.target.value)}
           placeholder="Input surname"
         />
-      </label>
-      <label>
-        Phone:
+      </div>
+      <div className="page_add-contact-item">
+        <label>Phone:</label>
         <input
           type="text"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="Input phone"
         />
-      </label>
-      <label>
-        Email:
+      </div>
+      <div className="page_add-contact-item">
+        <label>Email:</label>
         <input
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Input email"
         />
-      </label>
-      <label>
-        Category:
-        <input
-          type="text"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          placeholder="Input category"
-        />
-      </label>
-      {message}
+      </div>
+      <div className="page_add-contact-item">
+        <label>Category:</label>
+        <select onChange={(e) => console.log(e.target.value)}>
+          {info.categories.map((categories, index) => (
+            <option key={index} value={categories}>{categories}</option>
+          ))}
+        </select>
+      </div>
+      <div className="page_add-contact_block-message">{message}</div>
       <div className="page_add-contact__button-bar">
         <button onClick={fetching}>Submit</button>
         <Link to="/">

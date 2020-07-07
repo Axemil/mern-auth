@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 const AsideMenu = ({ info, burger }) => {
   const [flag, setFlag] = useState(false);
   const [text, setText] = useState("");
-  const [categoryes] = useState(info.categoryes)
+  const [categories] = useState(info.categories)
   const handleLogOut = () => {
     localStorage.setItem("token", "");
     setFlag(!flag);
@@ -50,7 +50,7 @@ const AsideMenu = ({ info, burger }) => {
         <div className="menu__box-aside__categories-label">
           <h2>Categories</h2>
         </div>
-        {categoryes.map((data, index) => (
+        {categories.map((data, index) => (
           <Link key={index} to={data === "All" ? "/" : "/" + data.toLowerCase()}>
             <div className="menu__box-aside__categories-item">{data}</div>
           </Link>
