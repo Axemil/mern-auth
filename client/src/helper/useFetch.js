@@ -8,7 +8,6 @@ const useFetch = (setting, data) => {
     await axios.post(setting, data)
       .then((res) => setResult(res))
       .catch((e) => {
-        console.log(e.response.data)
         setError(e.response.data);
       });
     return [result, error, fetching]

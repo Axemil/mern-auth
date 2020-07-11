@@ -1,18 +1,24 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import axios from "axios";
 
 const AsideMenu = ({ info, burger }) => {
   const [flag, setFlag] = useState(false);
-  const [text, setText] = useState("");
-  const [categories] = useState(info.categories)
+  const [categorie, setCategorie] = useState("");
+  const [categories] = useState(info.categories);
   const handleLogOut = () => {
     localStorage.setItem("token", "");
     setFlag(!flag);
   };
-  const handleText = (e) => setText(e.target.value);
-  const handleSubmit = () => {
-    if (text !== "") {
-      console.log(text);
+  const handleCategorie = (e) => setCategorie(e.target.value);
+  const handleAdd = () => {
+    if (categorie !== "") {
+      axios
+        .put("http://localhost:3000/api/add_new-categorie", {
+          email: info.email,
+          categories: [...info.categories, categorie],
+        })
+        .then((data) => console.log(data));
     }
   };
   return (
@@ -32,32 +38,38 @@ const AsideMenu = ({ info, burger }) => {
           <p onClick={handleLogOut}>Log out</p>
         </div>
       </div>
-      <form onSubmit={handleSubmit} className="menu__box-aside__search">
-        <input
-          className="menu__box-aside__search-input"
-          value={text}
-          type="text"
-          onChange={handleText}
-          placeholder="Search for a contact"
-        />
-        <input
-          className="menu__box-aside__search-submit"
-          type="submit"
-          value="🔝"
-        />
-      </form>
       <div className="menu__box-aside__categories">
         <div className="menu__box-aside__categories-label">
           <h2>Categories</h2>
         </div>
         {categories.map((data, index) => (
-          <Link key={index} to={data === "All" ? "/" : "/" + data.toLowerCase()}>
+          <Link
+            key={index}
+            to={data === "All" ? "/" : "/category/" + data}
+          >
             <div className="menu__box-aside__categories-item">{data}</div>
           </Link>
         ))}
+        <form
+          onSubmit={handleAdd}
+          className="menu__box-aside__categories-addCategorie"
+        >
+          <input
+            className="menu__box-aside__categories-addCategorie-input"
+            value={categorie}
+            type="text"
+            onChange={handleCategorie}
+            placeholder="Add new categorie"
+          />
+          <input
+            className="menu__box-aside__categories-addCategorie-submit"
+            type="submit"
+            value="➕"
+          />
+        </form>
       </div>
       <div className="menu__box-aside__new-contact menu__box-aside-link">
-        <Link to="/new-contact">
+        <Link to="/contact/new-contact">
           <p>Add new contact</p>
         </Link>
       </div>

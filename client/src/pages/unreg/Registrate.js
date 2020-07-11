@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import helper from "../../helper";
 
 const Registrate = () => {
-  const [flag, setFlag] = useState(false);
+  const history = useHistory();
   const [email, emailInput] = helper.useInput({
     type: "text",
     label: "Email: ",
@@ -35,7 +35,7 @@ const Registrate = () => {
   useEffect(() => {
     if (result) {
       setMessage(true, result.data);
-      setTimeout(() => setFlag(true), 1000)
+      setTimeout(() => history.push("/login"), 1000)
     } else if (error) {
       setMessage(false, error);
     }
@@ -58,7 +58,6 @@ const Registrate = () => {
             👩‍💻
           </span>
         </h2>
-        {flag && <Redirect to="/login"/>}
         {message}
         {[emailInput, nameInput, passwordInput, passwordConfirmInput]}
         <div className="unreg-page_block">

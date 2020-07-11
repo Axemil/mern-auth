@@ -76,6 +76,38 @@ router.get("/get-contact", async (req, res) => {
   }
 });
 
+router.put("/add_new-categorie", async (req, res) => {
+  try {
+    const { email, categories } = req.body;
+    const updatedUser = await User.findOneAndUpdate({ email }, { categories });
+    if (updatedUser) {
+      res.json({ updatedUser });
+    } else res.status(400).json({ error: "User didn't updated" });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+router.post("/get-one-contact", async (req, res) => {
+  try {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        result: "Error!",
+        errors: errors.array(),
+        message: "Incorrect data",
+      });
+    }
+    const { userId } = req.body;
+    const contact = await Contact.findById(userId);
+    if (contact) res.json(contact);
+    else res.json({ error: "error" });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 // router.post("/post-message", messageValidation(), async (req, res) => {
 //   try {
 //     const errors = validationResult(req);

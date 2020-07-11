@@ -1,3 +1,14 @@
+.page_back{
+    background-image: url("../../assets/back.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: $blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 .main{
     display: flex;
     justify-content: space-between;

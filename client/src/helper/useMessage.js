@@ -19,7 +19,6 @@ const useMessage = () => {
         </div>
       );
     } else if (!flag) {
-      console.log("False")
       setResult(
         <div className="message_error">
           <p>

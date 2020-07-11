@@ -37,6 +37,7 @@
             font-size: 1.1rem;
         }
         &-dots{
+            position: relative;
             &-block{
                 display: flex;
                 justify-content: center;
@@ -49,6 +50,29 @@
                     border-radius: 50%;
                 }
             }
+            &_menu {
+                position: absolute;
+                left: -105px;
+                top: 15px;
+                width: 140px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                background: rgb(255, 255, 255);
+                box-shadow: 0 0 10px 0 rgba(rgb(0, 0, 0), $alpha: 0.2);
+                &-item {
+                  padding: 10px;
+                  cursor: pointer;
+                  transition: 0.3s;
+                  color: $blue;
+                  width: 100%;
+                  font-weight: 600;
+                  &:hover {
+                    background: rgb(240, 240, 240);
+                  }
+                }
+              }
         }
     }
     &__label{

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import helper from "../../helper";
 
 
 const Login = ({login}) => {
-  const [flag,setFlag] = useState(false)
+  const history = useHistory();
   const [email, emailInput] = helper.useInput({
     type: "email",
     placeholder: "Email",
@@ -24,7 +24,7 @@ const Login = ({login}) => {
     if (result) {
       setMessage(true);
       localStorage.setItem('token', result.data.token)
-      setTimeout(() => setFlag(true),1000)
+      setTimeout(() => history.push("/"),1000)
     } else if (error) {
       setMessage(false, error);
     }
@@ -41,9 +41,9 @@ const Login = ({login}) => {
             🔑
           </span>
         </h2>
-        {flag && <Redirect to="/" />}
         {message}
-        {[emailInput, passwordInput]}
+        {emailInput}
+        {passwordInput}
         <div className="unreg-page_block">
           <button onClick={fetching} className="unreg-page_button">Sign in</button>
         </div>
