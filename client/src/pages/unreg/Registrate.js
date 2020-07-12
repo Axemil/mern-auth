@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import helper from "../../helper";
 
@@ -39,7 +39,7 @@ const Registrate = () => {
     } else if (error) {
       setMessage(false, error);
     }
-  }, [result, error, setMessage]);
+  }, [result, error, setMessage, history]);
   return (
     <div className="unreg-page_main">
       <div className="unreg-page_card">

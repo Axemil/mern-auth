@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Link,
-  Route,
   Redirect,
   useParams,
   useLocation,
@@ -10,10 +9,15 @@ import {
 import Header from "../reged/parts/Header";
 
 const Main = () => {
+  //Инфа юзера
   const [info, setInfo] = useState();
+  //Обработка состояния токена
   const [flag, setFlag] = useState(null);
+  //Массив контактов
   const [contacts, setContacts] = useState([]);
+  //Филтер контактов взятый из параметра URL
   let { filter } = useParams();
+  //Получение URL
   let location = useLocation();
 
   useEffect(() => {
@@ -36,7 +40,7 @@ const Main = () => {
           }
         });
     } else setFlag(false);
-  }, [Main, filter, location]);
+  }, [ filter, location]);
 
   if (flag !== null) {
     if (flag === true) {
@@ -47,7 +51,7 @@ const Main = () => {
             <div className="page">
               <div className="page-block">
                 {contacts.length > 0 ? (
-                  contacts.map(({ name, surname, phone, category, _id }) => {
+                  contacts.map(({ name, surname, phone, category, _id, email }) => {
                     const contact = (
                       <div key={_id} className="page-block__contact">
                         <div className="page-block__contact-pic"></div>
@@ -55,6 +59,7 @@ const Main = () => {
                           <p>
                             {name} {surname}, {category}
                           </p>
+                          <p>{email}</p>
                           <p>{phone}</p>
                         </div>
                         <div className="page-block__contact-dots">

@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  Link,
-  Redirect,
-  useHistory,
-  useParams,
-  useLocation,
-} from "react-router-dom";
+import { Link, Redirect, useHistory, useParams } from "react-router-dom";
 import helper from "../../helper";
 import axios from "axios";
-import Header from "../reged/parts/Header";
+import Header from "./parts/Header";
 
-const AddContact = (props) => {
+const FormContact = () => {
   //Для редиректов
   const history = useHistory();
   //Инфа юзера
@@ -20,7 +14,7 @@ const AddContact = (props) => {
   //Id контакта
   let { userId } = useParams();
   //Флаг для взаимодействия с текущим контактом
-  const [view, setView] = useState(false)
+  const [view, setView] = useState(false);
 
   //Информация контакта
   const [name, setName] = useState("");
@@ -41,6 +35,29 @@ const AddContact = (props) => {
       category,
     }
   );
+
+  const [updateResult, updateError, updateFetching] = helper.useUpdate("http://localhost:3000/api/update-contact", {
+    id: userId,
+    author: info.email,
+    name,
+    surname,
+    phone,
+    email,
+    category,
+  })
+
+  const deleteContact = () => {
+    axios.delete("http://localhost:3000/api/delete-contact", {
+      data: {
+        userId
+      }
+    }).then(() => {
+      history.push("/")
+    })
+  }
+
+
+
   const [message, setMessage] = helper.useMessage();
 
   useEffect(() => {
@@ -88,13 +105,15 @@ const AddContact = (props) => {
         } else setFlag(false);
       });
 
-    if (result) {
+    if (result || updateResult) {
       setMessage(true);
       setTimeout(() => history.push("/"), 1000);
-    } else if (error) {
-      setMessage(false, error);
+    } else if (error || updateError) {
+      setMessage(false, error || updateError);
     }
-  }, [result, error, category, AddContact, userId]);
+  }, [updateResult, updateError, result, error, userId, setMessage, history]);
+
+
   if (flag !== null) {
     if (flag === true)
       return (
@@ -154,14 +173,18 @@ const AddContact = (props) => {
                 </div>
                 <div className="page_add-contact_block-message">{message}</div>
                 <div className="page_add-contact__button-bar">
-                  <button onClick={() => {
-                    if(!view) fetching()
-                    else fetching()
-                  }}>Submit</button>
+                  <button
+                    onClick={() => {
+                      if (!view) fetching();
+                      else updateFetching();
+                    }}
+                  >
+                    {view ? "Edit" : "Add contact"}
+                  </button>
                   <Link to="/">
                     <button>Cancel</button>
                   </Link>
-                  {view && <button>Delete</button>}
+                  {view && <button onClick={deleteContact}>Delete</button>}
                 </div>
               </div>
             </div>
@@ -190,4 +213,4 @@ const AddContact = (props) => {
     );
 };
 
-export default AddContact;
+export default FormContact;

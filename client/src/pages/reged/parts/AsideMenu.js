@@ -3,12 +3,12 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const AsideMenu = ({ info, burger }) => {
-  const [flag, setFlag] = useState(false);
+  const history = useHistory();
   const [categorie, setCategorie] = useState("");
   const [categories] = useState(info.categories);
   const handleLogOut = () => {
     localStorage.setItem("token", "");
-    setFlag(!flag);
+    history.push("/login");
   };
   const handleCategorie = (e) => setCategorie(e.target.value);
   const handleAdd = () => {
@@ -23,7 +23,6 @@ const AsideMenu = ({ info, burger }) => {
   };
   return (
     <div className={burger ? "menu__box" : "menu__box-aside"}>
-      {flag && <Redirect to="/login" />}
       <Link to="/">
         <h1 className="menu__box-aside-logo menu__box-aside-link">
           Telephonebook App
