@@ -3,6 +3,7 @@ import { Link, Redirect, useHistory, useParams } from "react-router-dom";
 import helper from "../../helper";
 import axios from "axios";
 import Header from "./parts/Header";
+import Loader from "./parts/Loader";
 
 const FormContact = () => {
   //Для редиректов
@@ -195,22 +196,7 @@ const FormContact = () => {
       return <Redirect to="/login" />;
     }
   } else
-    return (
-      <div className="unreg-page_main">
-        <div className="unreg-page_card unreg-page_card-error-block">
-          <div className="lds-roller">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <Loader />
 };
 
 export default FormContact;

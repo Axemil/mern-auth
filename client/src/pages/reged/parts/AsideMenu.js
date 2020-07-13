@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import Categories from './Categories';
 
 const AsideMenu = ({ info, burger }) => {
   const history = useHistory();
@@ -41,14 +42,7 @@ const AsideMenu = ({ info, burger }) => {
         <div className="menu__box-aside__categories-label">
           <h2>Categories</h2>
         </div>
-        {categories.map((data, index) => (
-          <Link
-            key={index}
-            to={data === "All" ? "/" : "/category/" + data}
-          >
-            <div className="menu__box-aside__categories-item">{data}</div>
-          </Link>
-        ))}
+        <Categories categories={categories} />
         <form
           onSubmit={handleAdd}
           className="menu__box-aside__categories-addCategorie"
